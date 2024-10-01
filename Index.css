@@ -93,7 +93,8 @@ main .generater .tabs {
     height: 45px;
     color: rgba(83, 146, 239, 1);
     background: rgba(83, 146, 239, 0.3);
-    text-wrap: nowrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 main .generater .tabs input {
@@ -102,7 +103,6 @@ main .generater .tabs input {
 
 main .generater .tabs label {
     z-index: 10;
-    width: 129px;
     line-height: 45px;
     transition: all .5s;
     cursor: pointer;
@@ -143,7 +143,15 @@ main .generater .tabs #tab-upload:checked ~ .glider {
 }
 
 main .generater .content {
+    width: 300%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     text-align: center;
+    transition: all .5s;
+}
+
+main .generater .content span {
+    display: block;
 }
 
 main .generater .content input {
