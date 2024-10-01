@@ -3,6 +3,15 @@
     src: url("Resources/Font.ttf");
 }
 
+:root {
+    --theme-color: rgba(83, 146, 239, 1);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -91,7 +100,7 @@ main .generater .tabs {
     margin: 0;
     padding: 0;
     height: 45px;
-    color: rgba(83, 146, 239, 1);
+    color: var(--theme-color);
     background: rgba(83, 146, 239, 0.3);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -165,7 +174,7 @@ main .generater .content input {
     box-sizing: border-box;
     border-radius: 5px;
     transition: all .3s;
-    border: 2px solid rgba(83, 146, 239, 1);
+    border: 2px solid var(--theme-color);
     box-shadow: 0px 4px 15px  rgba(83, 146, 239, 0.3);
 }
 
@@ -189,14 +198,14 @@ main .generater .content .buttons button {
     height: 35px;
     font-size: 15px;
     border-radius: 5px;
-    color: rgba(83, 146, 239, 1);
+    color: var(--theme-color);
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 4px 15px  rgba(83, 146, 239, 0.3);
 }
 
 main .generater .content .buttons .generate {
     color: white;
-    background: rgba(83, 146, 239, 1);
+    background: var(--theme-color);
 }
 
 main .generater .content canvas {
@@ -205,7 +214,7 @@ main .generater .content canvas {
     box-sizing: border-box;
     border-radius: 10px;
     margin: 20px 0;
-    border: 2px solid rgba(83, 146, 239, 1);
+    border: 2px solid var(--theme-color);
     box-shadow: 0px 4px 15px  rgba(83, 146, 239, 0.3);
 }
 
@@ -230,7 +239,7 @@ main .generater .content .website .container .buttons {
     grid-template-rows: repeat(3, 1fr);
 }
 
-main .generater .content .upload #upload {
+main .generater .content .upload .upload-button {
     color: white;
     height: 45px;
     width: 85%;
@@ -242,9 +251,13 @@ main .generater .content .upload #upload {
     box-sizing: border-box;
     border-radius: 5px;
     transition: all .3s;
-    background: rgba(83, 146, 239, 1);
-    border: 2px solid rgba(83, 146, 239, 1);
+    background: var(--theme-color);
+    border: 2px solid var(--theme-color);
     box-shadow: 0px 4px 15px  rgba(83, 146, 239, 0.3);
+}
+
+main .generater .content .upload input {
+    display: none;
 }
 
 main .generater .content .upload .buttons {
@@ -255,9 +268,13 @@ main .generater .content .upload .buttons:last-child {
     grid-template-columns: repeat(3, 1fr);
 }
 
-/* main .user {
-    margin-left: 50px;
-} */
+main .user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+}
 
 footer {
     text-align: center;
