@@ -79,7 +79,7 @@ main {
 }
 
 main section {
-    height: 600px;
+    height: 630px;
     width: 400px;
     border-radius: 10px;
     overflow: hidden;
@@ -130,15 +130,15 @@ main .generater .tabs .glider {
     transition: all .5s;
 }
 
-main .generater .tabs #tab-mojang:checked ~ .glider {
+main .generater .tabs #mojang:checked ~ .glider {
     transform: translateX(0);
 }
 
-main .generater .tabs #tab-website:checked ~ .glider {
+main .generater .tabs #website:checked ~ .glider {
     transform: translateX(132px);
 }
 
-main .generater .tabs #tab-upload:checked ~ .glider {
+main .generater .tabs #upload:checked ~ .glider {
     transform: translateX(270px);
 }
 
@@ -174,32 +174,85 @@ main .generater .content input:focus {
     box-shadow: 0px 4px 15px  rgba(83, 146, 239, 0.5);
 }
 
+main .generater .content .buttons {
+    width: 85%;
+    margin: 0 auto;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
 main .generater .content .buttons button {
     border: none;
     cursor: pointer;
     font-family: "Pixel";
     height: 35px;
     font-size: 15px;
-    margin-left: 10px;
     border-radius: 5px;
-    width: calc(85% / 3 - 12px);
     color: rgba(83, 146, 239, 1);
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 4px 15px  rgba(83, 146, 239, 0.3);
 }
 
-main .generater .content .buttons button:first-child {
-    margin-left: 0;
+main .generater .content .buttons .generate {
+    color: white;
+    background: rgba(83, 146, 239, 1);
 }
 
 main .generater .content canvas {
-    width: 340px;
-    height: 340px;
+    width: 330px;
+    height: 330px;
     box-sizing: border-box;
     border-radius: 10px;
-    margin: 15px 0;
+    margin: 20px 0;
     border: 2px solid rgba(83, 146, 239, 1);
     box-shadow: 0px 4px 15px  rgba(83, 146, 239, 0.3);
+}
+
+main .generater .content .website .container {
+    gap: 15px;
+    width: 85%;
+    margin: 20px auto 0;
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+}
+
+main .generater .content .website .container .inputs input {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+main .generater .content .website .container .buttons {
+    margin: 0;
+    width: 100%;
+    gap: 10px;
+    grid-template-columns: none;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+main .generater .content .upload #upload {
+    color: white;
+    height: 45px;
+    width: 85%;
+    margin: 20px 0;
+    font-size: 18px;
+    padding: 10px;
+    text-align: center;
+    font-family: "Pixel";
+    box-sizing: border-box;
+    border-radius: 5px;
+    transition: all .3s;
+    background: rgba(83, 146, 239, 1);
+    border: 2px solid rgba(83, 146, 239, 1);
+    box-shadow: 0px 4px 15px  rgba(83, 146, 239, 0.3);
+}
+
+main .generater .content .upload .buttons {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+main .generater .content .upload .buttons:last-child {
+    grid-template-columns: repeat(3, 1fr);
 }
 
 /* main .user {

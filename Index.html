@@ -27,23 +27,23 @@
     <main>
         <section class="generater">
             <div class="tabs">
-                <input type="radio" id="tab-mojang" name="tabs" checked="">
-                <label for="tab-mojang">正版 ID</label>
-                <input type="radio" id="tab-website" name="tabs">
-                <label for="tab-website">皮肤站</label>
-                <input type="radio" id="tab-upload" name="tabs">
-                <label for="tab-upload">上传皮肤</label>
+                <input type="radio" id="mojang" name="tabs" checked="">
+                <label for="mojang">正版 ID</label>
+                <input type="radio" id="website" name="tabs">
+                <label for="website">皮肤站</label>
+                <input type="radio" id="upload" name="tabs">
+                <label for="upload">上传皮肤</label>
                 <span class="glider"></span>
             </div>
             <div class="content">
                 <span class="mojang">
-                    <input type="text" placeholder="请输入正版 ID" pattern="[A-Za-z_]+">
+                    <input type="text" placeholder="请输入正版 ID" class="player-name">
                     <div class="buttons">
                         <button class="generate">生成</button>
                         <button class="change_backgroud">换背景</button>
                         <button class="download">下载</button>
                     </div>
-                    <canvas id="avatar"></canvas>
+                    <canvas class="avatar"></canvas>
                     <div class="buttons">
                         <button class="publish">发布作品</button>
                         <button class="share">分享</button>
@@ -51,13 +51,31 @@
                     </div>
                 </span>
                 <span class="website">
-                    <input type="text" placeholder="请输入正版 ID" pattern="[A-Za-z_]+">
+                    <div class="container">
+                        <div class="inputs">
+                            <input type="text" placeholder="请输入正版 ID" class="player-name">
+                            <input type="text" value="littleskin.cn" placeholder="请输入皮肤站网址" class="website">
+                        </div>
+                        <div class="buttons">
+                            <button class="generate">生成</button>
+                            <button class="change_backgroud">换背景</button>
+                            <button class="download">下载</button>
+                        </div>
+                    </div>
+                    <canvas class="avatar"></canvas>
                     <div class="buttons">
-                        <button class="generate">生成</button>
+                        <button class="publish">发布作品</button>
+                        <button class="share">分享</button>
+                        <button class="upload">上传背景</button>
+                    </div>
+                </span>
+                <span class="upload">
+                    <button id="upload">点击上传</button>
+                    <div class="buttons">
                         <button class="change_backgroud">换背景</button>
                         <button class="download">下载</button>
                     </div>
-                    <canvas id="avatar"></canvas>
+                    <canvas class="avatar"></canvas>
                     <div class="buttons">
                         <button class="publish">发布作品</button>
                         <button class="share">分享</button>
@@ -71,7 +89,7 @@
         </section>
     </main>
     <footer>
-        <p>制作：Keishi LonelySail | 灵感来源：啾音回响 | 鼠绘：DongYue</p>
+        <p>制作：LonelySail Keishi | 灵感来源：啾音回响 | 鼠绘：DongYue</p>
         <p>GitHub 项目页面 | 打赏给作者一杯咖啡！</p>
     </footer>
     <script src="Index.js"></script>

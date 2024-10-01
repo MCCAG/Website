@@ -1,6 +1,6 @@
 const content = document.querySelector('.generater .content');
 const content_tabs = document.querySelectorAll('.generater .tabs input');
-const player_inputs = document.querySelectorAll('.generater .content input');
+const player_inputs = document.querySelectorAll('.generater .content input.player-name');
 
 
 function switch_content(index) {
