@@ -3,6 +3,17 @@
     src: url("Resources/Font.ttf");
 }
 
+@media (height <= 300px), (width <= 940px) {
+    main {
+        padding: 70px;
+        height: auto !important;
+    }
+
+    footer {
+        height: auto !important;
+    }
+}
+
 :root {
     --theme-color: rgba(83, 146, 239, 1);
 }
@@ -160,11 +171,19 @@ main .generater .content {
 }
 
 main .generater .content span {
+    opacity: 0;
     display: block;
+    transition: all .8s;
+    transform: translateX(100px);
+}
+
+main .generater .content span#active-content {
+    opacity: 1;
+    transform: none;
 }
 
 main .generater .content input {
-    height: 45px;
+    height: 55px;
     width: 85%;
     margin: 20px 0;
     font-size: 18px;
@@ -226,9 +245,14 @@ main .generater .content .website .container {
     grid-template-columns: 7fr 3fr;
 }
 
+main .generater .content .website .container .inputs {
+    display: grid;
+    gap: 15px;
+}
+
 main .generater .content .website .container .inputs input {
+    margin: 0;
     width: 100%;
-    margin-bottom: 0;
 }
 
 main .generater .content .website .container .buttons {
@@ -241,7 +265,7 @@ main .generater .content .website .container .buttons {
 
 main .generater .content .upload .upload-button {
     color: white;
-    height: 45px;
+    height: 50px;
     width: 85%;
     margin: 20px 0;
     font-size: 18px;
