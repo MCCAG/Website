@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/jobber/Desktop/Files/Github/Website",
-      "program": "/Users/jobber/Desktop/Files/Github/Website/build/Debug/outDebug"
+      "cwd": "/Users/jobber/Desktop/Files/Github/MCCAG/Website",
+      "program": "/Users/jobber/Desktop/Files/Github/MCCAG/Website/build/Debug/outDebug"
     }
   ]
 }

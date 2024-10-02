@@ -44,16 +44,16 @@ function check_input_value(regax) {
 function update_canvas() {
     const context = current_canvas.getContext('2d');
     const background = backgrounds[current_background];
-    context.clearRect(0, 0, 330, 330);
+    context.clearRect(0, 0, 1000, 1000);
     if (background.startsWith('linear-gradient')) {
         const colors = background.match(/#\w{6}/g);
-        const gradient = context.createLinearGradient(0, 0, 330, 330);
+        const gradient = context.createLinearGradient(0, 0, 1000, 1000);
         gradient.addColorStop(0, colors[0]);
         gradient.addColorStop(1, colors[1]);
         context.fillStyle = gradient;
     } else context.fillStyle = background;
-    context.fillRect(0, 0, 330, 330);
-    context.drawImage(current_avatar_image, 0, 0, 330, 330);
+    context.fillRect(0, 0, 1000, 1000);
+    context.drawImage(current_avatar_image, 0, 0, 1000, 1000);
 }
 
 function download() {
