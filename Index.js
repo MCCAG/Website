@@ -20,7 +20,7 @@ var current_avatar_image = new Image();
 current_avatar_image.src = '/Resources/Avatars/Keishi.png';
 
 function switch_content(index) {
-    const transform = index * 400;nn
+    const transform = index * 400;
     return function (event) {
         current.id = '';
         current = content.querySelector(`span.${event.target.id}`);
