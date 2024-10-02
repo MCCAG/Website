@@ -17,7 +17,7 @@ var current_background = 0;
 var current = content.querySelector('span#active-content');
 var current_canvas = current.querySelector('canvas');
 var current_avatar_image = new Image();
-current_avatar_image.src = '/Resources/Avatars/LonelySail.png';
+current_avatar_image.src = '/Resources/Avatars/Keishi.png';
 
 function switch_content(index) {
     const transform = index * 400;nn
