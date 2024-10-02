@@ -1,4 +1,3 @@
-const api_url = 'http://mccag.cn:8080/';
 const content = document.querySelector('.generater .content');
 const content_tabs = document.querySelectorAll('.generater .tabs input');
 
@@ -16,7 +15,7 @@ const backgrounds = [
 
 var current_background = 0;
 var current = content.querySelector('span#active-content');
-var current_canvas = current.querySelector('canvas.avatar');
+var current_canvas = current.querySelector('canvas');
 var current_avatar_image = new Image();
 current_avatar_image.src = '/Resources/Avatars/LonelySail.png';
 
@@ -25,7 +24,7 @@ function switch_content(index) {
     return function (event) {
         current.id = '';
         current = content.querySelector(`span.${event.target.id}`);
-        current_canvas = current.querySelector('canvas.avatar');
+        current_canvas = current.querySelector('canvas');
         current.id = 'active-content';
         content.style.transform = `translateX(-${transform}px)`;
         update_canvas();
@@ -45,6 +44,7 @@ function check_input_value(regax) {
 function update_canvas() {
     const context = current_canvas.getContext('2d');
     const background = backgrounds[current_background];
+    context.clearRect(0, 0, 330, 330);
     if (background.startsWith('linear-gradient')) {
         const colors = background.match(/#\w{6}/g);
         const gradient = context.createLinearGradient(0, 0, 330, 330);
@@ -72,46 +72,56 @@ function change_background() {
 
 async function request(address, data) {
     console.debug('Request:', address, data);
-    const response = await fetch(api_url + address, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data) // 将数据对象转换为 JSON 字符串
-    });
-    if (response.ok) {
-        const response_data = await response.json();
-        console.log(response_data);
-        if (response_data.success) return response_data.data;
-        return alert(response_data.message);
+    try {
+        const response = await fetch('https://api.mccag.cn/' + address, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data) // 将数据对象转换为 JSON 字符串
+        });
+        if (response.ok) {
+            const response_data = await response.json();
+            console.log(response_data);
+            if (response_data.success) return response_data.data;
+            return alert(response_data.message);
+        }
+        alert('请求失败，请检查网络连接！');
+    } catch (error) {
+        console.error(error);
+        alert('请求失败，请检查网络连接！');
     }
-    alert('请求失败，请检查网络连接！');
 }
 
 async function generate() {
     const input = current.querySelector('input.player-name');
     if (!input.value) return alert('请输入用户名！');
     if (current.className == 'website' && !skin_website_input.value) return alert('请输入皮肤站地址！');
+    const mask = current.querySelector('div.mask');
+    mask.style.opacity = 1;
     const send_data = { website: (current.className == 'website' ? (skin_website_input.value.startsWith('http://') || skin_website_input.value.startsWith('https://')) ? skin_website_input.value : 'https://' + skin_website_input.value : null), player: input.value, avatar_type: 'full' }
     const response = await request('generate/account', send_data);
+    mask.style.opacity = 0;
     if (!response) return;
     current_avatar_image.src = ('data:image/png;base64,' + response.image);
-    update_canvas();
 }
 
 async function generate_upload() {
     if (!upload.files.length) return alert('请选择要上传的图片！');
+    const mask = current.querySelector('div.mask');
+    mask.style.opacity = 1;
     const reader = new FileReader();
     reader.readAsDataURL(upload.files[0]);
     reader.onload = async function () {
         const image = reader.result.replace('data:image/png;base64,', '');
         const send_data = { skin_image: image, avatar_type: 'full' };
         const response = await request('generate/file', send_data);
+        mask.style.opacity = 0;
         if (!response) return;
         current_avatar_image.src = ('data:image/png;base64,' + response.image);
-        update_canvas();
     }
 }
 
-window.addEventListener('load', update_canvas);
+current_avatar_image.addEventListener('load', update_canvas);
+
 upload.addEventListener('change', generate_upload);
 skin_website_input.addEventListener('input', check_input_value(/[^A-Za-z0-9_.-]/g));
 for (const buttons of document.querySelectorAll('.generater .content button.generate'))
