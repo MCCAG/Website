@@ -2,6 +2,9 @@ const api_url = 'http://mccag.cn:8080/';
 const content = document.querySelector('.generater .content');
 const content_tabs = document.querySelectorAll('.generater .tabs input');
 
+const upload = document.querySelector('.generater .content .upload input');
+const skin_website_input = document.querySelector('.generater .content input.skin-website');
+
 const backgrounds = [
     '#ffcccb', '#add8e6', '#ffffff',
     'linear-gradient(135deg, #ffcccb 0%, #ffeb3b 100%)',
@@ -16,21 +19,6 @@ var current = content.querySelector('span#active-content');
 var current_canvas = current.querySelector('canvas.avatar');
 var current_avatar_image = new Image();
 current_avatar_image.src = '/Resources/Avatars/LonelySail.png';
-
-async function request(address, data) {
-    const response = await fetch(api_url + address, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data) // 将数据对象转换为 JSON 字符串
-    });
-    if (response.ok) {
-        const response_data = await response.json();
-        console.log(response_data);
-        if (response_data.success) return response_data.data;
-        return alert(response_data.message);
-    }
-    alert('请求失败，请检查网络连接！');
-}
 
 function switch_content(index) {
     const transform = index * 400;
@@ -68,15 +56,6 @@ function update_canvas() {
     context.drawImage(current_avatar_image, 0, 0, 330, 330);
 }
 
-async function generate() {
-    const input = content.querySelector('input.player-name');
-    const send_data = {player: input.value, avatar_type: 'full'}
-    const response = await request('generate/account', send_data);
-    if (!response) return;
-    current_avatar_image.src = ('data:image/png;base64,' + response.image);
-    update_canvas();
-}
-
 function download() {
     const link = document.createElement('a');
     link.download = 'Avatar.png';
@@ -91,8 +70,49 @@ function change_background() {
     update_canvas();
 }
 
+async function request(address, data) {
+    console.debug('Request:', address, data);
+    const response = await fetch(api_url + address, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data) // 将数据对象转换为 JSON 字符串
+    });
+    if (response.ok) {
+        const response_data = await response.json();
+        console.log(response_data);
+        if (response_data.success) return response_data.data;
+        return alert(response_data.message);
+    }
+    alert('请求失败，请检查网络连接！');
+}
+
+async function generate() {
+    const input = current.querySelector('input.player-name');
+    if (!input.value) return alert('请输入用户名！');
+    if (current.className == 'website' && !skin_website_input.value) return alert('请输入皮肤站地址！');
+    const send_data = { website: (current.className == 'website' ? (skin_website_input.value.startsWith('http://') || skin_website_input.value.startsWith('https://')) ? skin_website_input.value : 'https://' + skin_website_input.value : null), player: input.value, avatar_type: 'full' }
+    const response = await request('generate/account', send_data);
+    if (!response) return;
+    current_avatar_image.src = ('data:image/png;base64,' + response.image);
+    update_canvas();
+}
+
+async function generate_upload() {
+    if (!upload.files.length) return alert('请选择要上传的图片！');
+    const reader = new FileReader();
+    reader.readAsDataURL(upload.files[0]);
+    reader.onload = async function () {
+        const image = reader.result.replace('data:image/png;base64,', '');
+        const send_data = { skin_image: image, avatar_type: 'full' };
+        const response = await request('generate/file', send_data);
+        if (!response) return;
+        current_avatar_image.src = ('data:image/png;base64,' + response.image);
+        update_canvas();
+    }
+}
+
 window.addEventListener('load', update_canvas);
-const skin_website_input = document.querySelector('.generater .content input.skin-website');
+upload.addEventListener('change', generate_upload);
 skin_website_input.addEventListener('input', check_input_value(/[^A-Za-z0-9_.-]/g));
 for (const buttons of document.querySelectorAll('.generater .content button.generate'))
     buttons.addEventListener('click', generate);

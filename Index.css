@@ -263,13 +263,15 @@ main .generater .content .website .container .buttons {
     grid-template-rows: repeat(3, 1fr);
 }
 
-main .generater .content .upload .upload-button {
-    color: white;
+main .generater .content .upload label {
     height: 50px;
     width: 85%;
+    padding: 10px;
     margin: 20px 0;
     font-size: 18px;
-    padding: 10px;
+    line-height: 25px;
+    color: white;
+    display: inline-block;
     text-align: center;
     font-family: "Pixel";
     box-sizing: border-box;
