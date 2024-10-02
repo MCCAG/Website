@@ -20,7 +20,7 @@ var current_avatar_image = new Image();
 current_avatar_image.src = '/Resources/Avatars/LonelySail.png';
 
 function switch_content(index) {
-    const transform = index * 400;
+    const transform = index * 400;nn
     return function (event) {
         current.id = '';
         current = content.querySelector(`span.${event.target.id}`);

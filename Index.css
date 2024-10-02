@@ -13,8 +13,7 @@
     }
 }
 
-@media (height <=300px),
-(width <=940px) {
+@media (height <= 810px), (width <= 940px) {
     main {
         padding: 70px;
         height: auto !important;
