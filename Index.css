@@ -33,12 +33,55 @@ a {
     text-decoration: none;
 }
 
+ol, p {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: "Pixel";
     -webkit-user-select: none;
     user-select: none;
+}
+
+.tips {
+    position: fixed;
+    width: 350px;
+    top: 90px;
+    left: 0;
+    border: 5px;
+}
+
+.tips li {
+    height: 45px;
+    padding: 4px;
+    width: min-content;
+    border-radius: 10px;
+    line-height: 25px;
+    background-color: rgba(83, 146, 239, 0.3);
+}
+
+.tips li::before {
+    content: ' ';
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    margin: 10px;
+    background: url('Resources/Icons/Error.svg');
+    background-size: contain;
+}
+
+.tips li p {
+    height: 25px;
+    width: 230px;
+    display: inline-block;
+    /* position: absolute; */
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 1);
 }
 
 header {
@@ -64,7 +107,7 @@ header .language {
     height: 30px;
 }
 
-header .language svg {
+header .language img {
     width: 25px;
     height: 25px;
     margin: 20px;
@@ -83,7 +126,6 @@ header .language ol {
     border-radius: 5px;
     height: auto;
     transition: all .3s;
-    list-style-type: none;
     padding: 5px;
     position: absolute;
     top: 70px;
@@ -111,7 +153,7 @@ main {
 main section {
     height: 630px;
     width: 400px;
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
     background-color: rgba(255, 0.8);
     box-shadow: 0 4px 15px rgba(83, 146, 239, 0.3);
@@ -134,7 +176,7 @@ main .generater .tabs input {
 main .generater .tabs label {
     z-index: 10;
     line-height: 45px;
-    transition: all .5s;
+    transition: transform .5s;
     cursor: pointer;
     text-align: center;
     box-sizing: border-box;
@@ -152,12 +194,12 @@ main .generater .tabs .glider {
     width: 130px;
     height: 45px;
     display: block;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     background: rgba(255, 255, 255, 1);
     position: relative;
     bottom: 45px;
-    transition: all .5s;
+    transition: transform .5s;
 }
 
 main .generater .tabs #mojang:checked~.glider {
@@ -177,14 +219,14 @@ main .generater .content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     text-align: center;
-    transition: all .5s;
+    transition: transform .5s;
 }
 
 main .generater .content span {
     opacity: 0;
     display: block;
     position: relative;
-    transition: all .8s;
+    transition: opacity .8s, transform .8s;
     transform: translateX(100px);
 }
 
@@ -221,6 +263,58 @@ main .generater .content .buttons {
     grid-template-columns: repeat(3, 1fr);
 }
 
+main .generater .content .buttons input {
+    display: none;
+}
+
+main .generater .content .buttons .selections {
+    position: absolute;
+    z-index: 15;
+    opacity: 0;
+    max-height: 0;
+    border-radius: 5px;
+    color: var(--theme-color);
+    background-color: rgba(255, 255, 255, 1);
+    transform: translateY(45px);
+    transition: max-height .5s, opacity .5s;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(83, 146, 239, 0.3);
+}
+
+main .generater .content .buttons .selections li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color .5s;
+}
+
+main .generater .content .buttons .selections li:hover {
+    background: rgba(83, 146, 239, 0.2);
+}
+
+main .generater .content .buttons input#generate-mojang ~ .selections {
+    width: 105px;
+}
+
+main .generater .content .buttons input#generate-website ~ .selections {
+    width: 97px;
+}
+
+main .generater .content .buttons input:checked ~ .selections {
+    opacity: 1;
+    max-height: 150px;
+}
+
+main .generater .content .buttons label {
+    cursor: pointer;
+    height: 35px;
+    font-size: 15px;
+    line-height: 35px;
+    border-radius: 5px;
+    color: rgba(255, 255, 255, 1);
+    background: var(--theme-color);
+    box-shadow: 0px 4px 15px rgba(83, 146, 239, 0.3);
+}
+
 main .generater .content .buttons button {
     border: none;
     cursor: pointer;
@@ -231,11 +325,6 @@ main .generater .content .buttons button {
     color: var(--theme-color);
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 4px 15px rgba(83, 146, 239, 0.3);
-}
-
-main .generater .content .buttons .generate {
-    color: white;
-    background: var(--theme-color);
 }
 
 main .generater .content .mask {
@@ -250,7 +339,7 @@ main .generater .content .mask {
     position: absolute;
     left: 35px;
     opacity: 0;
-    transition: all .5s;
+    transition: opacity .5s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -311,15 +400,15 @@ main .generater .content .upload label {
     margin: 20px 0;
     font-size: 18px;
     line-height: 25px;
-    color: white;
     display: inline-block;
     text-align: center;
+    cursor: pointer;
     font-family: "Pixel";
     box-sizing: border-box;
     border-radius: 5px;
-    transition: all .3s;
     background: var(--theme-color);
     border: 2px solid var(--theme-color);
+    color: rgba(255, 255, 255, 1);
     box-shadow: 0px 4px 15px rgba(83, 146, 239, 0.3);
 }
 

@@ -20,7 +20,7 @@ var current_avatar_image = new Image();
 current_avatar_image.src = '/Resources/Avatars/Keishi.png';
 
 function switch_content(index) {
-    const transform = index * 400;nn
+    const transform = index * 400;
     return function (event) {
         current.id = '';
         current = content.querySelector(`span.${event.target.id}`);
@@ -28,6 +28,16 @@ function switch_content(index) {
         current.id = 'active-content';
         content.style.transform = `translateX(-${transform}px)`;
         update_canvas();
+    }
+}
+
+function close_selections() {
+    const selections = document.querySelectorAll('input:checked[type=checkbox]');
+    for (const selection of selections) {
+        if (selection.getAttribute('status') == '1') {
+            selection.checked = false;
+            selection.setAttribute('status', '0');
+        } else selection.setAttribute('status', '1');
     }
 }
 
@@ -70,6 +80,8 @@ function change_background() {
     update_canvas();
 }
 
+// API 相关
+
 async function request(address, data) {
     console.debug('Request:', address, data);
     try {
@@ -91,13 +103,14 @@ async function request(address, data) {
     }
 }
 
-async function generate() {
+async function generate(event) {
     const input = current.querySelector('input.player-name');
+    const avatar_type = event.target.getAttribute('avatar-type');
     if (!input.value) return alert('请输入用户名！');
     if (current.className == 'website' && !skin_website_input.value) return alert('请输入皮肤站地址！');
     const mask = current.querySelector('div.mask');
     mask.style.opacity = 1;
-    const send_data = { website: (current.className == 'website' ? (skin_website_input.value.startsWith('http://') || skin_website_input.value.startsWith('https://')) ? skin_website_input.value : 'https://' + skin_website_input.value : null), player: input.value, avatar_type: 'full' }
+    const send_data = { website: (current.className == 'website' ? (skin_website_input.value.startsWith('http://') || skin_website_input.value.startsWith('https://')) ? skin_website_input.value : 'https://' + skin_website_input.value : null), player: input.value, avatar_type: avatar_type }
     const response = await request('generate/account', send_data);
     mask.style.opacity = 0;
     if (!response) return;
@@ -120,11 +133,12 @@ async function generate_upload() {
     }
 }
 
+window.addEventListener('click', close_selections);
 current_avatar_image.addEventListener('load', update_canvas);
 
 upload.addEventListener('change', generate_upload);
 skin_website_input.addEventListener('input', check_input_value(/[^A-Za-z0-9_.-]/g));
-for (const buttons of document.querySelectorAll('.generater .content button.generate'))
+for (const buttons of document.querySelectorAll('.generater .content li'))
     buttons.addEventListener('click', generate);
 for (const buttons of document.querySelectorAll('.generater .content button.download'))
     buttons.addEventListener('click', download);
