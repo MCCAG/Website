@@ -1,3 +1,4 @@
+const tips_container = document.querySelector('.tips');
 const content = document.querySelector('.generater .content');
 const content_tabs = document.querySelectorAll('.generater .tabs input');
 
@@ -18,6 +19,21 @@ var current = content.querySelector('span#active-content');
 var current_canvas = current.querySelector('canvas');
 var current_avatar_image = new Image();
 current_avatar_image.src = '/Resources/Avatars/Keishi.png';
+
+function popup_tips(text, type) {
+    const tips = document.createElement('li');
+    const tips_text = document.createElement('p');
+    tips.className = type;
+    tips_text.textContent = text;
+    tips.appendChild(tips_text);
+    tips_container.appendChild(tips);
+    tips.style.transform = `translateX(-${tips.offsetWidth + 40}px)`;
+    setTimeout(() => tips.style.transform = 'translateX(0px)', 100)
+    setTimeout(() => {
+        tips.style.transform = `translateX(-${tips.offsetWidth + 40}px)`;
+        setTimeout(() => tips_container.removeChild(tips), 1000);
+    }, 5000);
+}
 
 function switch_content(index) {
     const transform = index * 400;
@@ -94,20 +110,20 @@ async function request(address, data) {
             const response_data = await response.json();
             console.log(response_data);
             if (response_data.success) return response_data.data;
-            return alert(response_data.message);
+            return popup_tips(response_data.message, 'error');
         }
-        alert('请求失败，请检查网络连接！');
+        popup_tips('请求失败，请检查网络连接！', 'error');
     } catch (error) {
         console.error(error);
-        alert('请求失败，请检查网络连接！');
+        popup_tips('请求失败，请检查网络连接！', 'error');
     }
 }
 
 async function generate(event) {
     const input = current.querySelector('input.player-name');
     const avatar_type = event.target.getAttribute('avatar-type');
-    if (!input.value) return alert('请输入用户名！');
-    if (current.className == 'website' && !skin_website_input.value) return alert('请输入皮肤站地址！');
+    if (!input.value) return popup_tips('请输入用户名！', 'error');
+    if (current.className == 'website' && !skin_website_input.value) return popup_tips('请输入皮肤站地址！', 'error');
     const mask = current.querySelector('div.mask');
     mask.style.opacity = 1;
     const send_data = { website: (current.className == 'website' ? (skin_website_input.value.startsWith('http://') || skin_website_input.value.startsWith('https://')) ? skin_website_input.value : 'https://' + skin_website_input.value : null), player: input.value, avatar_type: avatar_type }
@@ -115,10 +131,10 @@ async function generate(event) {
     mask.style.opacity = 0;
     if (!response) return;
     current_avatar_image.src = ('data:image/png;base64,' + response.image);
+    popup_tips('生成头像成功！', 'success');
 }
 
 async function generate_upload() {
-    if (!upload.files.length) return alert('请选择要上传的图片！');
     const mask = current.querySelector('div.mask');
     mask.style.opacity = 1;
     const reader = new FileReader();
@@ -131,6 +147,7 @@ async function generate_upload() {
         if (!response) return;
         current_avatar_image.src = ('data:image/png;base64,' + response.image);
     }
+    popup_tips('生成头像成功！', 'success');
 }
 
 window.addEventListener('click', close_selections);
