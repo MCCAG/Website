@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
+    <title>Minecraft Cute Avatar Generator</title>
+    <link rel="icon" type="image/png" href="/Resources/Logo.png">
+    <link rel="stylesheet" href="/Index.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/Resources/Logo.png" alt="Logo">
+            <h1>Minecraft CAG</h1>
+        </div>
+        <div class="language">
+            <input type="checkbox" id="language-switch" value="0">
+            <label for="language-switch">
+                <img src="/Resources/Icons/Language.svg" alt="select language">
+            </label>
+            <ol>
+                <li id="chinese"><a href="/">汉语</a></li>
+                <li id="english"><a href="/Translations/English.html">English</a></lo>
+                <li id="japanese"><a href="/Translations/Japanese.html">日本語</a></li>
+            </ol>
+        </div>
+    </header>
+    <main>
+        <ol class="tips"></ol>
+        <section class="generater">
+            <div class="tabs">
+                <input type="radio" id="mojang" name="tabs" checked="">
+                <label for="mojang">genuine id</label>
+                <input type="radio" id="website" name="tabs">
+                <label for="website">skin station</label>
+                <input type="radio" id="upload" name="tabs">
+                <label for="upload">upload skin</label>
+                <span class="glider"></span>
+            </div>
+            <div class="content">
+                <span class="mojang" id="active-content">
+                    <input type="text" placeholder="please enter the genuine id" class="player-name">
+                    <div class="buttons">
+                        <input id="generate-mojang" type="checkbox">
+                        <label for="generate-mojang">generate</label>
+                        <ol class="selections">
+                            <li avatar-type="full">full body photo</li>
+                            <li avatar-type="big_head">half-length photo</li>
+                            <li avatar-type="head">avatar only</li>
+                        </ol>
+                        <button class="change-background">change background</button>
+                        <button class="download">download</button>
+                    </div>
+                    <canvas height="1000" width="1000"></canvas>
+                    <div class="mask"></div>
+                    <div class="buttons" style="opacity: .6;">
+                        <button class="publish" style="cursor: not-allowed;">publish works</button>
+                        <button class="share" style="cursor: not-allowed;">share</button>
+                        <button class="upload" style="cursor: not-allowed;">upload background</button>
+                    </div>
+                </span>
+                <span class="website">
+                    <div class="container">
+                        <div class="inputs">
+                            <input type="text" placeholder="please enter the genuine id" class="player-name">
+                            <input type="text" value="littleskin.cn" placeholder="please enter the skin site url" class="skin-website">
+                        </div>
+                        <div class="buttons">
+                            <input id="generate-website" type="checkbox">
+                            <label for="generate-website">generate</label>
+                            <ol class="selections">
+                                <li avatar-type="full">full body photo</li>
+                                <li avatar-type="big_head">half-length photo</li>
+                                <li avatar-type="head">avatar only</li>
+                            </ol>
+                            <button class="change-background">change background</button>
+                            <button class="download">download</button>
+                        </div>
+                    </div>
+                    <canvas height="1000" width="1000"></canvas>
+                    <div class="mask"></div>
+                    <div class="buttons" style="opacity: .6;">
+                        <button class="publish" style="cursor: not-allowed;">publish works</button>
+                        <button class="share" style="cursor: not-allowed;">share</button>
+                        <button class="upload" style="cursor: not-allowed;">upload background</button>
+                    </div>
+                </span>
+                <span class="upload">
+                    <input type="file" id="upload-file" accept="image/*">
+                    <label for="upload-file">click to upload</label>
+                    <div class="buttons">
+                        <button class="change-background">change background</button>
+                        <button class="download">download</button>
+                    </div>
+                    <canvas height="1000" width="1000"></canvas>
+                    <div class="mask"></div>
+                    <div class="buttons" style="opacity: .6;">
+                        <button class="publish" style="cursor: not-allowed;">publish works</button>
+                        <button class="share" style="cursor: not-allowed;">share</button>
+                        <button class="upload" style="cursor: not-allowed;">upload background</button>
+                    </div>
+                </span>
+            </div>
+        </section>
+        <section class="user">
+            <h2>under construction</h2>
+            <h2>stay tuned</h2>
+        </section>
+    </main>
+    <footer>
+        <p>production:<a href="https://github.com/Lonely-Sails/" rel="noopener" target="_blank">LonelySail</a> <a href="https://space.bilibili.com/23785358/" rel="noopener" target="_blank">Keishi</a> | <a href="https://www.bilibili.com/video/BV1rB4y1F7dW/" rel="noopener" target="_blank">source of inspiration: noise playback (video link at station b)</a> | sponsor: dongyue</p>
+        <p><a href="https://github.com/MCCAG/" rel="noopener" target="_blank">Github</a> | <a href="https://afdian.com/a/Keishi/" rel="noopener" target="_blank">give the author a cup of coffee!</a> | friendly links:<a href="http://klpbbs.com/" rel="noopener" target="_blank">creeper forum</a> <a href="https://www.minebbs.com/" rel="noopener" target="_blank">MineBBS</a> <a href="https://www.rainyun.com/" rel="noopener" target="_blank">nimbus server</a> | <span id="busuanzi_container_site_pv">total visits to this site <span id="busuanzi_value_site_pv"></span> second-rate</span></p>
+    </footer>
+    <script src="/Index.js"></script>
+    <script async="" src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>

@@ -4,23 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.7">
     <title>可爱头像生成器 | Minecraft Cute Avatar Generator</title>
-    <link rel="icon" type="image/png" href="Resources/Logo.png">
-    <link rel="stylesheet" href="Index.css">
+    <link rel="icon" type="image/png" href="/Resources/Logo.png">
+    <link rel="stylesheet" href="/Index.css">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="Resources/Logo.png" alt="Logo">
+            <img src="/Resources/Logo.png" alt="Logo">
             <h1>Minecraft CAG</h1>
         </div>
-        <!-- <div class="language">
-            <img src="Resources/Icons/Language.svg" alt="选择语言">
+        <div class="language">
+            <input type="checkbox" id="language-switch" value="0">
+            <label for="language-switch">
+                <img src="/Resources/Icons/Language.svg" alt="选择语言">
+            </label>
             <ol>
-                <li id="chinese">汉语</li>
-                <li id="english">English</lo>
-                <li id="japanese">日本語</li>
+                <li id="chinese"><a href="/">汉语</a></li>
+                <li id="english"><a href="/Translations/English.html">English</a></lo>
+                <li id="japanese"><a href="/Translations/Japanese.html">日本語</a></li>
             </ol>
-        </div> -->
+        </div>
     </header>
     <main>
         <ol class="tips"></ol>
@@ -38,7 +41,7 @@
                 <span class="mojang" id="active-content">
                     <input type="text" placeholder="请输入正版 ID" class="player-name">
                     <div class="buttons">
-                        <input id="generate-mojang" type="checkbox" status="0"></input>
+                        <input id="generate-mojang" type="checkbox"></input>
                         <label for="generate-mojang">生成</label>
                         <ol class="selections">
                             <li avatar-type="full">全身照</li>
@@ -63,7 +66,7 @@
                             <input type="text" value="littleskin.cn" placeholder="请输入皮肤站网址" class="skin-website">
                         </div>
                         <div class="buttons">
-                            <input id="generate-website" type="checkbox" status="0"></input>
+                            <input id="generate-website" type="checkbox"></input>
                             <label for="generate-website">生成</label>
                             <ol class="selections">
                                 <li avatar-type="full">全身照</li>
@@ -108,7 +111,7 @@
         <p>制作：<a href="https://github.com/Lonely-Sails/" rel="noopener" target="_blank">LonelySail</a> <a href="https://space.bilibili.com/23785358/" rel="noopener" target="_blank">Keishi</a> | <a href="https://www.bilibili.com/video/BV1rB4y1F7dW/" rel="noopener" target="_blank">灵感来源：噪音回放（B站视频链接）</a> | 赞助：DongYue</p>
         <p><a href="https://github.com/MCCAG/" rel="noopener" target="_blank">Github</a> | <a href="https://afdian.com/a/Keishi/" rel="noopener" target="_blank">打赏给作者一杯咖啡！</a> | 友链：<a href="http://klpbbs.com/" rel="noopener" target="_blank">苦力怕论坛</a> <a href="https://www.minebbs.com/" rel="noopener" target="_blank">MineBBS</a> <a href="https://www.rainyun.com/" rel="noopener" target="_blank">雨云服务器</a> | <span id='busuanzi_container_site_pv'>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次</span></p>
     </footer>
-    <script src="Index.js"></script>
+    <script src="/Index.js"></script>
     <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

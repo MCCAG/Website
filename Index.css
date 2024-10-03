@@ -70,38 +70,50 @@ header .language {
     height: 30px;
 }
 
-header .language img {
+header .language input {
+    display: none;
+}
+
+header .language input:checked ~ ol {
+    opacity: 1;
+    max-height: 300px;
+}
+
+header .language label {
+    display: block;
+    text-align: center;
+    margin: 20px;
+}
+
+header .language label img {
     width: 25px;
     height: 25px;
-    margin: 20px;
     cursor: pointer;
 }
 
-header .language:hover ol {
-    opacity: 1;
-    max-height: 50px;
-}
-
 header .language ol {
-    margin: 0;
+    z-index: 15;
     opacity: 0;
     max-height: 0;
     border-radius: 5px;
-    height: auto;
-    transition: all .3s;
-    padding: 5px;
-    position: absolute;
-    top: 70px;
+    overflow: hidden;
+    position: fixed;
     right: 30px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 4px 10px rgba(83, 146, 239, 0.6);
+    top: 70px;
+    color: var(--theme-color);
+    background-color: rgba(255, 255, 255, 1);
+    transition: max-height .5s, opacity .5s;
+    box-shadow: 0px 4px 15px rgba(83, 146, 239, 0.3);
 }
 
 header .language ol li {
-    font-size: 15px;
-    height: 20px;
-    box-sizing: border-box;
-    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color .5s;
+}
+
+header .language ol li:hover {
+    background: rgba(83, 146, 239, 0.2);
 }
 
 main {
