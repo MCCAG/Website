@@ -31,8 +31,11 @@ function popup_tips(text, type) {
     setTimeout(() => tips.style.transform = 'translateX(0px)', 100)
     setTimeout(() => {
         tips.style.transform = `translateX(-${tips.offsetWidth + 40}px)`;
-        setTimeout(() => tips_container.removeChild(tips), 1000);
-    }, 5000);
+        setTimeout(() => {
+            tips.style.height = '0';
+            setTimeout(() => tips_container.removeChild(tips), 1000);
+        }, 1000);
+    }, 8000);
 }
 
 function switch_content(index) {
@@ -122,8 +125,8 @@ async function request(address, data) {
 async function generate(event) {
     const input = current.querySelector('input.player-name');
     const avatar_type = event.target.getAttribute('avatar-type');
-    if (!input.value) return popup_tips('请输入用户名！', 'error');
-    if (current.className == 'website' && !skin_website_input.value) return popup_tips('请输入皮肤站地址！', 'error');
+    if (!input.value) return popup_tips('请输入用户名！', 'warning');
+    if (current.className == 'website' && !skin_website_input.value) return popup_tips('请输入皮肤站地址！', 'warning');
     const mask = current.querySelector('div.mask');
     mask.style.opacity = 1;
     const send_data = { website: (current.className == 'website' ? (skin_website_input.value.startsWith('http://') || skin_website_input.value.startsWith('https://')) ? skin_website_input.value : 'https://' + skin_website_input.value : null), player: input.value, avatar_type: avatar_type }
